@@ -1,0 +1,12 @@
+git init
+git status
+git add name //for single file
+git add . //for all file
+git commit -m "first commit"
+git remote add origin https://github.com/shadr862/Leetcode.git
+git push -u origin master
+
+token=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
+username=shadr862/Leetcode
+git remote set-url origin https://<token>@github.com/<username>/<repo>
+git remote set-url origin https://<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>@github.com/shadr862/Leetcode
