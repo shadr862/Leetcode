@@ -1,4 +1,6 @@
 git init
+git fetch origin master:tmp
+git rebase tmp
 git status
 git add name //for single file
 git add . //for all file
