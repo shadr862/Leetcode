@@ -1,12 +1,19 @@
 git init
-git fetch origin master:tmp
-git rebase tmp
 git status
 git add name //for single file
 git add . //for all file
-git commit -m "first commit"
+git fetch origin master:tmp
+git rebase tmp
+git commit -m "commit"
 git remote add origin https://github.com/shadr862/Leetcode.git
 git push -u origin master
+
+
+find token=setting->developer setting->personal access token->tokens(classic)->generate new token(classic)
+
+give note and expiration 
+select all option
+generate token and copying it
 
 token=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
 username=shadr862/Leetcode
