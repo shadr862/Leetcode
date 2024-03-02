@@ -1,0 +1,32 @@
+git init
+
+git status
+git add name //for single file
+git add . //for all file
+
+git commit -m "commit"
+git remote add origin https://github.com/shadr862/Leetcode.git
+git fetch origin master:tmp
+git rebase tmp
+git push -u origin master
+
+git commit -m "commit"
+git remote add origin https://github.com/shadr862/Course.git
+git fetch origin master:tmp
+git rebase tmp
+git push -u origin master
+
+git commit -m "commit"
+git remote add origin https://github.com/shadr862/Project.git
+git fetch origin master:tmp
+git rebase tmp
+git push -u origin master
+
+
+
+
+
+token=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
+username=shadr862/Leetcode
+git remote set-url origin https://<token>@github.com/<username>/<repo>
+
