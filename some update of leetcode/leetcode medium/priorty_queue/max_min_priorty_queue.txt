@@ -1,0 +1,59 @@
+void solve()
+{
+   ll n=5;
+   vector<ll> v={1,2,3,4,5};
+
+  for(auto x:v)
+  {
+      cout<<x<<' ';
+  }
+  cout<<endl;
+
+  cout<<"MAX priorty queue"<<endl;
+  priority_queue<int> pq;
+  for(int i=0;i<n;i++)
+  {
+    pq.push(v[i]);
+  }
+
+  while(!pq.empty())
+  {
+      cout<<pq.top()<<' ';
+      pq.pop();
+  }
+  cout<<endl;
+
+  cout<<"MIN priorty queue"<<endl;
+  priority_queue<int,vector<int>,greater<int> > pq1;
+  for(int i=0;i<n;i++)
+  {
+    pq1.push(v[i]);
+  }
+
+  while(!pq1.empty())
+  {
+      cout<<pq1.top()<<' ';
+      pq1.pop();
+  }
+  cout<<endl;
+
+
+
+}
+
+
+
+int main()
+{
+    fast_in_out;
+    //sive();
+    ll t;
+    cin>>t;
+    while(t--)
+	{
+	   // cout<<"Case "<<c<<':'<<" ";
+		solve();
+		//c++;
+	}
+	return 0;
+}

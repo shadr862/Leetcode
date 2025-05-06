@@ -1,0 +1,53 @@
+https://leetcode.com/contest/weekly-contest-362/problems/minimum-moves-to-spread-stones-over-grid/class Solution {
+public:
+    int ans=INT_MAX;
+    void solve(int i,vector<vector<int>>& zero,vector<vector<int>>& extra,vector<int>& vis,int sum )
+    {
+        if(i==zero.size())
+        {
+            ans=min(ans,sum);
+            return ;
+        }
+        
+        for(int j=0;j<zero.size();j++)
+        {
+            if(vis[j]==1)
+            {
+                continue;
+            }
+            vis[j]=1;
+            int s=abs(zero[j][0]-extra[i][0])+abs(zero[j][1]-extra[i][1]);
+            solve(i+1,zero,extra,vis,sum+s);
+            vis[j]=0;
+        }
+    }
+    
+    int minimumMoves(vector<vector<int>>& grid) {
+        vector<vector<int>> zero,extra;
+        for(int i=0;i<3;i++)
+        {
+            for(int j=0;j<3;j++)
+            {
+                if(grid[i][j]>1)
+                {
+                    int x=grid[i][j]-1;
+                    while(x--)
+                    {
+                        extra.push_back({i,j});
+                    }
+                }
+                else if(grid[i][j]==0)
+                {
+                    zero.push_back({i,j});
+                }
+            }
+        }
+        int x=zero.size();
+        vector<int> vis(x,0);
+        solve(0,zero,extra,vis,0);
+       
+        return ans;
+    }
+    
+    
+};

@@ -1,0 +1,81 @@
+https://leetcode.com/contest/weekly-contest-364/problems/beautiful-towers-ii/
+
+class Solution {
+public:
+    long long maximumSumOfHeights(vector<int>& maxHeights) {
+        int n=maxHeights.size();
+        vector<long> next(n,0),pre(n,0);
+        vector<long> left(n,0),rgt(n,0);
+        stack<long> s,s1;
+        
+        for(int i=0;i<n;i++)
+        {
+            while(!s.empty() && maxHeights[s.top()]>=maxHeights[i])
+            {
+                s.pop();
+            }
+            
+            pre[i]=s.empty()? -1:s.top();
+            s.push(i);
+        }
+        
+        
+        
+        for(int j=n-1;j>=0;j--)
+        {
+            while(!s1.empty() && maxHeights[s1.top()]>=maxHeights[j])
+            {
+                s1.pop();
+            }
+            
+            next[j]=s1.empty()? n:s1.top();
+            s1.push(j);
+        }
+        
+        
+        for(int i=0;i<n;i++)
+        {
+            left[i]=maxHeights[i];
+            
+            if(i==0)
+                continue;
+            
+            if(maxHeights[i]>=maxHeights[i-1])
+            {
+                left[i]=left[i]+left[i-1];
+            }
+            else
+            {
+               left[i]+=(i-pre[i]-1)*maxHeights[i]+((pre[i]<0)? 0:left[pre[i]]);
+            }
+        }
+        
+        
+        for(int j=n-1;j>=0;j--)
+        {
+            rgt[j]=maxHeights[j];
+            
+            if(j==n-1)
+                continue;
+
+            if(maxHeights[j]>=maxHeights[j+1])
+            {
+                rgt[j]=rgt[j]+rgt[j+1];
+            }
+            else 
+            {
+                rgt[j]+=(next[j]-j-1)*maxHeights[j]+((next[j]>=n)? 0:rgt[next[j]]);
+            }
+        }
+        
+       
+        long ans=0;
+        for(int i=0;i<n;i++)
+        {
+            ans=max(ans,left[i]+rgt[i]-maxHeights[i]);
+        }
+          
+        
+        return ans;
+    }
+};

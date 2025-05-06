@@ -1,0 +1,58 @@
+https://leetcode.com/contest/biweekly-contest-115/problems/longest-unequal-adjacent-groups-subsequence-ii/
+class Solution {
+public:
+    
+    int  Hamdis(string& s,string& s1)
+    {
+        int c=0;
+        for(int i=0;i<s.size();i++)
+        {
+            if(s[i]!=s1[i])
+            {
+                c++;
+            }
+        }
+        return c;
+    }
+    
+    vector<string> getWordsInLongestSubsequence(int n, vector<string>& words, vector<int>& groups) {
+        
+       vector<int> dp(n,1),pre(n);
+        
+        for(int i=0;i<n;i++)
+        {
+            pre[i]=-1;
+            for(int j=0;j<i;j++)
+            {
+                if(groups[i]!=groups[j] && words[i].size()==words[j].size() && Hamdis(words[i],words[j])==1)
+                {
+                    if(dp[i]<dp[j]+1)
+                    {
+                        dp[i]=dp[j]+1;
+                        pre[i]=j;
+                    }
+                }
+            }
+        }
+        int mx=-1,ind=-1;
+        for(int i=0;i<n;i++)
+        {
+            if(dp[i]>mx)
+            {
+                mx=dp[i];
+                ind=i;
+            }
+        }
+        
+        vector<string> ans;
+        
+     do{
+         ans.push_back(words[ind]);
+         ind=pre[ind];
+         
+     }while(ind!=-1);
+         reverse(ans.begin(),ans.end());
+         return ans;
+        
+    }
+};

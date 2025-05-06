@@ -1,0 +1,43 @@
+https://leetcode.com/contest/biweekly-contest-113/problems/minimum-edge-reversals-so-every-node-is-reachable/
+class Solution {
+public:
+    int totalCost=0;
+    void DFS(int start, unordered_map<int,vector<pair<int,int>> >& graph ,vector<int>& vis,vector<int>& depth,vector<int>& cost)
+    {
+        vis[start]=1;
+        cout<<start<<endl;
+        for(auto x:graph[start])
+        {
+            if(vis[x.first]==0)
+            {
+                depth[x.first]=depth[start]+1;
+                cost[x.first]=cost[start]+x.second;
+                totalCost+=x.second;
+                DFS(x.first,graph,vis,depth,cost);
+            }
+        }
+    }
+    
+    vector<int> minEdgeReversals(int n, vector<vector<int>>& edges) {
+        
+        unordered_map<int,vector<pair<int,int>> > graph;
+        
+        for(auto x:edges)
+        {
+            graph[x[0]].push_back({x[1],0});
+            graph[x[1]].push_back({x[0],1});
+        }
+        
+        vector<int> vis(n,0),depth(n,0),cost(n,0);
+        DFS(0,graph,vis,depth,cost);
+        
+        vector<int> ans(n);
+        ans[0]=totalCost;
+        
+        for(int i=1;i<n;i++)
+        {
+            ans[i]=depth[i]-cost[i]+totalCost-cost[i];
+        }
+        return ans;
+    }
+};

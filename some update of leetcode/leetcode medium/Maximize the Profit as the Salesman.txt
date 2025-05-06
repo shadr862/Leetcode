@@ -1,0 +1,37 @@
+https://leetcode.com/contest/weekly-contest-359/problems/maximize-the-profit-as-the-salesman/
+class Solution {
+public:
+    int maximizeTheProfit(int n, vector<vector<int>>& offers) {
+        
+        vector<int> dp(n);
+        
+        map<int,vector<pair<int,int>>> range;
+        
+        for(auto &x:offers)
+        {
+            range[x[0]].push_back({x[1],x[2]});
+        }
+        
+        
+        for(int i=0;i<n;i++)
+        {
+            
+            vector<pair<int,int>> temp=range[i];
+            cout<<range[i].size()<<endl;
+            
+            if(i>0)dp[i]=max(dp[i],dp[i-1]);
+            
+            for(auto x:temp)
+            {
+                if(i>0)dp[x.first]=max(dp[x.first],dp[i-1]+x.second);
+                else 
+                    dp[x.first]=max(dp[x.first],x.second);
+                    
+            }
+            
+            temp.clear();
+        }
+        
+        return dp[n-1];
+    }
+};

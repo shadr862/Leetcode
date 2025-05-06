@@ -1,0 +1,39 @@
+https://leetcode.com/contest/weekly-contest-361/problems/count-of-interesting-subarrays/
+class Solution {
+public:
+    long long countInterestingSubarrays(vector<int>& nums, int modulo, int k) {
+        
+        
+        long ans=0;
+        unordered_map<long,long> map;
+        for(int i=0;i<nums.size();i++)
+        {
+            if(nums[i]%modulo==k)
+            {
+                nums[i]=1;
+            }
+            else
+            {
+                nums[i]=0;
+            }
+            if(i>0)
+            {
+                nums[i]=nums[i-1]+nums[i];
+            }
+            cout<<nums[i]<<" ";
+        }
+        cout<<endl;
+        map[0]=1;
+        for(int i=0;i<nums.size();i++)
+        {
+            long target=(nums[i]-k+modulo)%modulo;
+            ans+=map[target];
+            map[nums[i]%modulo]++;
+    
+        }
+    
+        
+        return ans;
+        
+    }
+};

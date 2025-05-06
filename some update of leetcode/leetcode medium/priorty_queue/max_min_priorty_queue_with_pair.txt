@@ -1,0 +1,67 @@
+void solve()
+{
+   ll n=5;
+   vector<pair<ll,ll>> v={{7,1},{8,2},{9,3},{10,4},{5,5}};
+
+  for(auto x:v)
+  {
+      cout<<x.first<<' '<<x.second<<endl;;
+  }
+  cout<<endl;
+
+  cout<<"MAX priorty queue"<<endl;
+  auto compare = [](const pair<ll,ll>& a, const pair<ll,ll>& b )
+  {
+      return a.second<b.second;
+  };
+  priority_queue<pair<ll,ll>,vector<pair<ll,ll>>,decltype(compare)> pq(compare);
+  for(int i=0;i<n;i++)
+  {
+    pq.push(v[i]);
+  }
+
+  while(!pq.empty())
+  {
+      cout<<pq.top().second<<' ';
+      pq.pop();
+  }
+  cout<<endl;
+
+  cout<<"MIN priorty queue"<<endl;
+   auto compare1 = [](const pair<ll,ll>& a, const pair<ll,ll>& b )
+  {
+      return a.second>b.second;
+  };
+  priority_queue<pair<ll,ll>,vector<pair<ll,ll>>,decltype(compare1)> pq1(compare1);
+  for(int i=0;i<n;i++)
+  {
+    pq1.push(v[i]);
+  }
+
+  while(!pq1.empty())
+  {
+      cout<<pq1.top().second<<' ';
+      pq1.pop();
+  }
+  cout<<endl;
+
+
+
+}
+
+
+
+int main()
+{
+    fast_in_out;
+    //sive();
+    ll t;
+    cin>>t;
+    while(t--)
+	{
+	   // cout<<"Case "<<c<<':'<<" ";
+		solve();
+		//c++;
+	}
+	return 0;
+}
